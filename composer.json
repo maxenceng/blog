@@ -1,0 +1,20 @@
+{
+    "name": "slim3/tuto",
+    "authors": [
+        {
+            "name": "maxenceng",
+            "email": "maxence.grosjean@cpe.fr"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "require": {
+        "slim/slim": "^3.8",
+        "slim/twig-view": "^2.2",
+        "illuminate/database": "^5.4",
+        "erusev/parsedown": "^1.6"
+    }
+}
