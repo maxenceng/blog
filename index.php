@@ -31,7 +31,7 @@ $app = new App($config);
 /**
  * Launches the data from the Container file
  */
-require('./app/Container.php');
+require('./bootstrap/container.php');
 
 /**
  * List of routes used for the app
