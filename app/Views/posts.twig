@@ -1,0 +1,26 @@
+{% extends "layout.twig" %}
+
+{% block content %}
+    <div class="title">
+        <h2>{{ state }} posts</h2>
+    </div>
+    <div class="columns container">
+        {% for post in posts %}
+            <div class="column col-6 card">
+                <div class="lightgray">
+                    <div class="card-header">
+                        <h4 class="card-title">{{ post.username }}</h4>
+                        <h6 class="card-subtitle">Written by: {{ user.id }}</h6>
+                    </div>
+                    <div class="divider"></div>
+                </div>
+                <div class="card-body">
+                    <p>{{ user.password }}</p>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="btn">Read more</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

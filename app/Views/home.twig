@@ -1,5 +1,14 @@
 {% extends "layout.twig" %}
 
 {% block content %}
-    <h1>Welcome to my blog</h1>
+    <div class="empty">
+        <div class="empty-icon">
+            <i class="icon icon-people"></i>
+        </div>
+        <h1 class="empty-title">Welcome to my blog</h1>
+        <p class="empty-subtitle">Click the button to log in and post articles</p>
+        <div class="empty-action">
+            <a href="/login" class="btn btn-lg btn-empty">Log in</a>
+        </div>
+    </div>
 {% endblock %}

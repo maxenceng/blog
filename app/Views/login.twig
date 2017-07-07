@@ -1,24 +1,57 @@
 {% extends "layout.twig" %}
 
 {% block content %}
-    <h1>Log In</h1>
-    <form action="/login" method="post">
-        <div class="row">
-            <div class="input-field col s12">
-                <label for="username">Username</label>
-                <input type="text" id="username" name="username">
+    <div class="columns container divider-div">
+        <div class="column">
+            <div class="title">
+                <h2>Log in</h2>
             </div>
+            <form action="/login" method="post">
+                <div class="form-group">
+                    <label class="form-label" for="email-login">Email</label>
+                    <input class="form-input" type="email"
+                           id="email-login" name="email"
+                           placeholder="Email" />
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="password-login">Password</label>
+                    <input class="form-input" type="password"
+                           id="password-login" name="password"
+                           placeholder="Password" />
+                </div>
+                <div class="form-group form-submit">
+                    <button class="btn btn-lg btn-block">Sign in</button>
+                </div>
+            </form>
         </div>
-        <div class="row">
-            <div class="input-field col s12">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password">
+        <div class="divider-vert" data-content="OR"></div>
+        <div class="column">
+            <div class="title">
+                <h2>Sign up</h2>
             </div>
+            <form action="/signup" method="post">
+                <div class="form-group">
+                    <label class="form-label" for="email-signup">Email</label>
+                    <input class="form-input" type="email"
+                           id="email-signup" name="email"
+                           placeholder="Email" />
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="password-signup">Password</label>
+                    <input class="form-input" type="password"
+                           id="password-signup" name="password"
+                           placeholder="Password" />
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="confirm-password-signup">Confirm password</label>
+                    <input class="form-input" type="password"
+                           id="confirm-password-signup" name="confirm-password"
+                           placeholder="Password" />
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-lg btn-block">Sign up</button>
+                </div>
+            </form>
         </div>
-        <div class="row">
-            <div class="submit-div">
-                <input type="submit" class="waves-effect waves-light btn blue" value="Sign Up">
-            </div>
-        </div>
-    </form>
+    </div>
 {% endblock %}

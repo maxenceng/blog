@@ -14,10 +14,6 @@ class SignupController {
     $this->container = $container;
   }
 
-  public function get(Request $req, Response $res) {
-    $this->container->view->render($res, 'signup.twig');
-  }
-
   public function post(Request $req, Response $res) {
     var_dump($_POST);
   }

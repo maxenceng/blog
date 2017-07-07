@@ -2,47 +2,30 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!--Import Google Icon Font-->
-    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-    <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="public/css/materialize.min.css" />
+    <link type="text/css" rel="stylesheet" href="public/css/spectre.min.css" />
     <link rel="stylesheet" href="public/css/main.css" />
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
-    <title>Blog</title>
+<title>Blog</title>
 </head>
 <body>
-    <nav class="blue">
-        <div class="nav-wrapper">
-            <a href="#" class="brand-logo">Blog</a>
-            <a href="#" data-activates="mobile-demo" class="button-collapse">
-                <i class="material-icons">menu</i>
-            </a>
-            <ul class="right hide-on-med-and-down">
-                <li class="active"><a href="/">Home</a></li>
-                <li><a href="#">Public Posts</a></li>
-                <li><a href="#">Private Posts</a></li>
-                <li><a href="/signup">Sign Up</a></li>
-                <li><a href="/login">Log In</a></li>
-            </ul>
-            <ul class="side-nav" id="mobile-demo">
-                <li><a href="/">Home</a></li>
-                <li><a href="#">Public Posts</a></li>
-                <li><a href="#">Private Posts</a></li>
-                <li><a href="/signup">Sign Up</a></li>
-                <li><a href="/login">Log In</a></li>
-            </ul>
+    <div class="navdiv lightgray">
+        <div class="container grid-960">
+            <header class="navbar">
+                <section class="navbar-section">
+                    <a href="/" class="btn btn-link">Home</a>
+                    <a href="/private-posts" class="btn btn-link">Private</a>
+                    <a href="/public-posts" class="btn btn-link">Public</a>
+                </section>
+                <section class="navbar-section">
+                    <a href="/login" class="btn btn-primary">Login</a>
+                </section>
+            </header>
         </div>
-    </nav>
+    </div>
     <div class="container">
         {% block content %}{% endblock %}
     </div>
 </body>
-<!--Import jQuery before materialize.js-->
-<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<script type="text/javascript" src="public/js/materialize.min.js"></script>
-<script>
-    $('.button-collapse').sideNav()
-</script>
 </html>
