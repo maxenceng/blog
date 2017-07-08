@@ -22,24 +22,29 @@ class PrivateController
    */
   public function getAll(Request $req, Response $res) {
     $id = 3;
-    $user = User::with('posts')->where('id', $id)->get(['id', 'username']);
-    $this->container->view->render($res, 'private.twig', array(
-      'user' => $user
+    $user = User::withPosts($id);
+    $posts = $this->formatData($user);
+    $this->container->view->render($res, 'posts.twig', array(
+      'state' => 'Private',
+      'posts' => $posts
     ));
   }
 
   public function getOne(Request $req, Response $res, $args) {
-    /*
-    $user = User::with('posts')->where('id', $id)->get(['id', 'username']);
-    $post = Post::with(['user' => function($query) {
-      $query->select('id', 'username');
-    }])->where('slug', $args[slug])->where('public', false)->get();
-    $this->container->view->render($res, 'private.twig', array(
-      'state' => 'Slug',
-      'posts' => $post
+    $id = 3;
+    $user = User::withSlug($id, $args[slug]);
+    $posts = $this->formatData($user);
+    $this->container->view->render($res, 'post.twig', array(
+      'post' => $posts[0]
     ));
-    */
   }
 
-
+  private function formatData($user) {
+    $posts = $user[0][posts];
+    foreach ($posts as $post) {
+      $post[user] = new User();
+      $post[user][username] = $user[0][username];
+    }
+    return $posts;
+  }
 }

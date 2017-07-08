@@ -1,0 +1,17 @@
+{% extends "layout.twig" %}
+
+{% block content %}
+    <div class="title">
+    </div>
+    <div class="container grid-960">
+        <div class="post-title">
+            <h2>{{ post.title }}</h2>
+        </div>
+        <div class="post-text">
+            <p>{{ post.text }}</p>
+        </div>
+        <cite>
+            Written by: {{ post.user.username }}
+        </cite>
+    </div>
+{% endblock %}

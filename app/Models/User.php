@@ -12,4 +12,16 @@ class User extends Model {
   public function posts() {
     return $this->hasMany('\App\Models\Post', 'idUser');
   }
+
+  public function scopeWithPosts($query, $id) {
+    return $query->with(['posts' => function($q) {
+      $q->where('public', false);
+    }])->where('id', $id)->get(['id', 'username']);
+  }
+
+  public function  scopeWithSlug($query, $id, $slug) {
+    return $query->with(['posts' => function($q) use($slug) {
+      $q->where('slug', $slug)->where('public', false);
+    }])->where('id', $id)->get(['id', 'username']);
+  }
 }

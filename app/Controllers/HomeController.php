@@ -29,26 +29,17 @@ class HomeController {
     public function db(Request $req, Response $res) {
       $b = true;
       $id = 3;
-      $test5 = User::with('posts')->where('id', $id)->get(['id', 'username'])->toJson();
+      $test5 = User::with('posts')->where('id', $id)->get(['id', 'username']);
       $test6 = Post::with(['user' => function($query) {
         $query->select('id', 'username');
       }])->where('public', true)->get();
-      var_dump($test5);
-      var_dump($test6);
+      $test = User::withPosts($id);
+      $test2 = User::withSlug($id, 'title-2');
+      var_dump($test->toJson());
+      var_dump($test2->toJson());
     }
 
     public function pd(Request $req, Response $res) {
       echo $this->container->pd->text('Hello _Parsedown_!');
-    }
-
-    public function slug(Request $req, Response $res, $args) {
-      $post = Post::with(['user' => function($query) {
-        $query->select('id', 'username');
-      }])->where('slug', $args[slug])->where('public', true)->get();
-      $this->container->view->render($res, 'public.twig', array(
-        'state' => 'Slug',
-        'posts' => $post
-      ));
-
     }
 }

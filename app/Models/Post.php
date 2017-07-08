@@ -12,4 +12,10 @@ class Post extends Model {
   public function user() {
     return $this->belongsTo('\App\Models\User', 'idUser');
   }
+
+  public function scopeWithUser($query) {
+    return $query->with(['user' => function($query) {
+      $query->select('id', 'username');
+    }])->where('public', true);
+  }
 }

@@ -2,11 +2,11 @@
 
 {% block content %}
     <div class="title">
-        <h2>Public posts</h2>
+        <h2>{{ state }} posts</h2>
     </div>
-    <div class="columns container">
+    <div class="container grid-960">
         {% for post in posts %}
-            <div class="column col-6 card">
+            <div class="card">
                 <div class="lightgray">
                     <div class="card-header">
                         <h4 class="card-title">{{ post.title }}</h4>
@@ -15,10 +15,10 @@
                     <div class="divider"></div>
                 </div>
                 <div class="card-body">
-                    <p>{{ post.text }}</p>
+                    <p>{{ post.text | slice(0, 2) }}...</p>
                 </div>
                 <div class="card-footer">
-                    <a href="/public-posts/{{ post.slug }}" class="btn">Read more</a>
+                    <a href="/{{ state|lower }}-posts/{{ post.slug }}" class="btn">Read more</a>
                 </div>
             </div>
         {% endfor %}

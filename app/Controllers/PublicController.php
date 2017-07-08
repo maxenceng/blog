@@ -21,20 +21,17 @@ class PublicController
    * @param Response $res
    */
   public function getAll(Request $req, Response $res) {
-    $posts = Post::with(['user' => function($query) {
-      $query->select('id', 'username');
-    }])->where('public', true)->get();
-    $this->container->view->render($res, 'public.twig', array(
+    $posts = Post::withUser()->get();
+    $this->container->view->render($res, 'posts.twig', array(
+      'state' => 'Public',
       'posts' => $posts
     ));
   }
 
   public function getOne(Request $req, Response $res, $args) {
-    $post = Post::with(['user' => function($query) {
-      $query->select('id', 'username');
-    }])->where('slug', $args[slug])->where('public', true)->get();
-    $this->container->view->render($res, 'public.twig', array(
-      'posts' => $post
+    $posts = Post::withUser()->where('slug', $args[slug])->get();
+    $this->container->view->render($res, 'post.twig', array(
+      'post' => $posts[0]
     ));
   }
 }

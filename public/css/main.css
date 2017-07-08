@@ -35,3 +35,11 @@ a {
     padding: 0.75em!important;
     display: inline;
 }
+
+.post-title {
+    margin: 1em auto;
+}
+
+.post-text {
+    font-size: 2em!important;
+}
