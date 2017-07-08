@@ -20,11 +20,26 @@ class PrivateController
    * @param Request $req
    * @param Response $res
    */
-  public function get(Request $req, Response $res) {
-    $this->container->view->render($res, 'posts.twig', array(
-      'state' => 'Private',
-      'users' => User::all()
+  public function getAll(Request $req, Response $res) {
+    $id = 3;
+    $user = User::with('posts')->where('id', $id)->get(['id', 'username']);
+    $this->container->view->render($res, 'private.twig', array(
+      'user' => $user
     ));
   }
+
+  public function getOne(Request $req, Response $res, $args) {
+    /*
+    $user = User::with('posts')->where('id', $id)->get(['id', 'username']);
+    $post = Post::with(['user' => function($query) {
+      $query->select('id', 'username');
+    }])->where('slug', $args[slug])->where('public', false)->get();
+    $this->container->view->render($res, 'private.twig', array(
+      'state' => 'Slug',
+      'posts' => $post
+    ));
+    */
+  }
+
 
 }

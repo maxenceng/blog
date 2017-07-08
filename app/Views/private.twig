@@ -1,0 +1,26 @@
+{% extends "layout.twig" %}
+
+{% block content %}
+    <div class="title">
+        <h2>Private posts</h2>
+    </div>
+    <div class="columns container">
+        {% for post in user[0].posts %}
+            <div class="column col-6 card">
+                <div class="lightgray">
+                    <div class="card-header">
+                        <h4 class="card-title">{{ post.title }}</h4>
+                        <h6 class="card-subtitle">Written by: {{ user[0].username }}</h6>
+                    </div>
+                    <div class="divider"></div>
+                </div>
+                <div class="card-body">
+                    <p>{{ post.text }}</p>
+                </div>
+                <div class="card-footer">
+                    <a href="/private-posts/{{ post.slug }}" class="btn">Read more</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

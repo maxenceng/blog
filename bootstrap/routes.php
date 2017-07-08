@@ -12,8 +12,10 @@ use App\Controllers\SignupController;
  */
 $app->get('/', HomeController::class . ':get')->setName('home');
 
-$app->get('/public-posts', PublicController::class . ':get');
-$app->get('/private-posts', PrivateController::class . ':get');
+$app->get('/public-posts', PublicController::class . ':getAll');
+$app->get('/private-posts', PrivateController::class . ':getAll');
+$app->get('/public-posts/{slug}', PublicController::class . ':getOne');
+$app->get('/private-posts/{slug}', PrivateController::class . ':getOne');
 
 /* TESTS */
 $app->get('/db', HomeController::class . ':db');

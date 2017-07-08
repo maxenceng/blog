@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 
-use App\Models\User;
+use App\Models\Post;
 use Slim\Http\Request;
 use Slim\Http\Response;
 
@@ -20,11 +20,21 @@ class PublicController
    * @param Request $req
    * @param Response $res
    */
-  public function get(Request $req, Response $res) {
-    $this->container->view->render($res, 'posts.twig', array(
-      'state' => 'Public',
-      'posts' => Post::all()->where('public', true)
+  public function getAll(Request $req, Response $res) {
+    $posts = Post::with(['user' => function($query) {
+      $query->select('id', 'username');
+    }])->where('public', true)->get();
+    $this->container->view->render($res, 'public.twig', array(
+      'posts' => $posts
     ));
   }
 
+  public function getOne(Request $req, Response $res, $args) {
+    $post = Post::with(['user' => function($query) {
+      $query->select('id', 'username');
+    }])->where('slug', $args[slug])->where('public', true)->get();
+    $this->container->view->render($res, 'public.twig', array(
+      'posts' => $post
+    ));
+  }
 }

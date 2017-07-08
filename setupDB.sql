@@ -11,6 +11,7 @@ CREATE TABLE users(
 CREATE TABLE posts(
   id INT PRIMARY KEY NOT NULL,
   title VARCHAR(100) NOT NULL,
+  slug VARCHAR(100) NOT NULL,
   text VARCHAR(100) NOT NULL,
   public BOOLEAN NOT NULL,
   idUser INT NOT NULL,
@@ -38,7 +39,8 @@ INSERT INTO users VALUES (
 
 INSERT INTO posts VALUES (
   1,
-  'title1',
+  'Title 1',
+  'title-1',
   'text1',
   true,
   2
@@ -46,8 +48,18 @@ INSERT INTO posts VALUES (
 
 INSERT INTO posts VALUES (
   2,
-  'title2',
+  'Title 2',
+  'title-2',
   'text2',
   false,
+  3
+);
+
+INSERT INTO posts VALUES (
+  3,
+  'Title 3',
+  'title-3',
+  'text3',
+  true,
   3
 );
