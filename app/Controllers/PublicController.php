@@ -7,13 +7,7 @@ use App\Models\Post;
 use Slim\Http\Request;
 use Slim\Http\Response;
 
-class PublicController
-{
-  private $container;
-
-  public function __construct($container) {
-    $this->container = $container;
-  }
+class PublicController extends BaseController {
 
   /**
    * Renders the public posts page
@@ -29,7 +23,7 @@ class PublicController
   }
 
   public function getOne(Request $req, Response $res, $args) {
-    $posts = Post::withUser()->where('slug', $args[slug])->get();
+    $posts = Post::withUser()->where('slug', $args['slug'])->get();
     $this->container->view->render($res, 'post.twig', array(
       'post' => $posts[0]
     ));

@@ -4,7 +4,8 @@ DROP TABLE IF EXISTS posts CASCADE;
 
 CREATE TABLE users(
   id INT PRIMARY KEY NOT NULL,
-  username VARCHAR(100) NOT NULL ,
+  username VARCHAR(100) NOT NULL,
+  email VARCHAR(100) NOT NULL,
   password VARCHAR(100) NOT NULL
 );
 
@@ -22,18 +23,21 @@ CREATE TABLE posts(
 INSERT INTO users VALUES (
   1,
   'max',
+  'max@max.fr',
   'root'
 );
 
 INSERT INTO users VALUES (
   2,
   'test',
+  'test@test.fr',
   'root'
 );
 
 INSERT INTO users VALUES (
   3,
   'testas',
+  'testas@testas.fr'
   'root'
 );
 

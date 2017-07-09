@@ -7,15 +7,9 @@ use App\Models\User;
 use Slim\Http\Request;
 use Slim\Http\Response;
 
-class HomeController {
+class HomeController extends BaseController {
 
-    private $container;
-    private $users;
 
-    public function __construct($container) {
-      $this->container = $container;
-      $this->users = $container->db->table('users');
-    }
 
     /**
      * Renders the home page

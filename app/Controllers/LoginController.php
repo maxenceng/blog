@@ -3,23 +3,25 @@
 namespace App\Controllers;
 
 
+use App\Models\User;
 use Slim\Http\Request;
 use Slim\Http\Response;
 
-class LoginController {
+class LoginController extends BaseController {
 
-  private $container;
-
-  public function __construct($container) {
-    $this->container = $container;
-  }
 
   public function get(Request $req, Response $res) {
     $this->container->view->render($res, 'login.twig');
   }
 
   public function post(Request $req, Response $res) {
-    var_dump($_POST);
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $user = User::all()->where('username', $username)->where('password', $password);
+    if($user['username'] === null) {
+      $this->redirect('/');
+    }
+    var_dump($username, $password);
   }
 
 }

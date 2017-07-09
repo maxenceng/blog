@@ -7,13 +7,7 @@ use App\Models\User;
 use Slim\Http\Request;
 use Slim\Http\Response;
 
-class PrivateController
-{
-  private $container;
-
-  public function __construct($container) {
-    $this->container = $container;
-  }
+class PrivateController extends BaseController {
 
   /**
    * Renders the private posts page
@@ -32,7 +26,7 @@ class PrivateController
 
   public function getOne(Request $req, Response $res, $args) {
     $id = 3;
-    $user = User::withSlug($id, $args[slug]);
+    $user = User::withSlug($id, $args['slug']);
     $posts = $this->formatData($user);
     $this->container->view->render($res, 'post.twig', array(
       'post' => $posts[0]
@@ -40,10 +34,10 @@ class PrivateController
   }
 
   private function formatData($user) {
-    $posts = $user[0][posts];
+    $posts = $user[0]['posts'];
     foreach ($posts as $post) {
-      $post[user] = new User();
-      $post[user][username] = $user[0][username];
+      $post['user'] = new User();
+      $post['user']['username'] = $user[0]['username'];
     }
     return $posts;
   }
