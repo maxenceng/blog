@@ -18,7 +18,7 @@ class PrivateController extends BaseController {
     $id = 3;
     $user = User::withPosts($id);
     $posts = $this->formatData($user);
-    $this->container->view->render($res, 'posts.twig', array(
+    $this->render($res, 'posts.twig', array(
       'state' => 'Private',
       'posts' => $posts
     ));
@@ -28,7 +28,7 @@ class PrivateController extends BaseController {
     $id = 3;
     $user = User::withSlug($id, $args['slug']);
     $posts = $this->formatData($user);
-    $this->container->view->render($res, 'post.twig', array(
+    $this->render($res, 'post.twig', array(
       'post' => $posts[0]
     ));
   }

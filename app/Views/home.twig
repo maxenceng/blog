@@ -6,9 +6,29 @@
             <i class="icon icon-people"></i>
         </div>
         <h1 class="empty-title">Welcome to my blog</h1>
-        <p class="empty-subtitle">Click the button to log in and post articles</p>
-        <div class="empty-action">
-            <a href="/login" class="btn btn-lg btn-empty">Log in</a>
-        </div>
+        {% if session.username is defined %}
+            <p class="empty-subtitle">You can now write articles</p>
+            <form action="/" method="post" class="container grid-960">
+                <div class="form-group">
+                    <label class="form-label" for="username-login">Title</label>
+                    <input class="form-input" type="text"
+                           id="title" name="title"
+                           placeholder="Title" />
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="text">Text</label>
+                    <textarea class="form-input" id="text"
+                              rows="10" name="text" ></textarea>
+                </div>
+                <div class="form-group form-submit">
+                    <button class="btn btn-lg btn-block">Submit</button>
+                </div>
+            </form>
+        {% else %}
+            <p class="empty-subtitle">Click the button to log in and post articles</p>
+            <div class="empty-action">
+                <a href="/login" class="btn btn-lg btn-empty">Log in</a>
+            </div>
+        {% endif %}
     </div>
 {% endblock %}

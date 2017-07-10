@@ -11,17 +11,18 @@ class LoginController extends BaseController {
 
 
   public function get(Request $req, Response $res) {
-    $this->container->view->render($res, 'login.twig');
+    $this->render($res, 'login.twig');
   }
 
   public function post(Request $req, Response $res) {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-    $user = User::all()->where('username', $username)->where('password', $password);
-    if($user['username'] === null) {
-      $this->redirect('/');
+    $username = $this->sanitize($_POST['username']);
+    $password = $this->sanitize($_POST['password']);
+    $testOnUser = User::all()->where('username', $username)->where('password', $password)->count();
+    if($testOnUser === 0) {
+      $this->redirect('/login');
     }
-    var_dump($username, $password);
+    $_SESSION['username'] = $username;
+    $this->redirect('/');
   }
 
 }

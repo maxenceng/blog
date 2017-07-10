@@ -10,20 +10,34 @@ use Slim\Http\Response;
 class SignupController extends BaseController {
 
   public function post(Request $req, Response $res) {
-    $username = $_POST['username'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    $confirmPassword = $_POST['confirm-password'];
-    if($password !== $confirmPassword || $password === null) {
-      $this->redirect('/');
+    $newUser = array(
+      'username' => $this->sanitize($_POST['username']),
+      'email' => $this->sanitize($_POST['email']),
+      'password' => $this->sanitize($_POST['password'])
+    );
+    $confirmPassword = $this->sanitize($_POST['confirm-password']);
+    if($newUser['password'] !== $confirmPassword || $newUser['password'] === null) {
+      $this->redirect('/login');
     }
-    $testOnUsername = User::all()->where('username', $username);
-    $testOnEmail = User::all()->where('email', $email);
-    if($testOnUsername['username'] !== null || $testOnEmail['username'] !== null) {
-      $this->redirect('/');
+    $testOnUsername = User::all()->where('username', $newUser['username'])->count();
+    $testOnEmail = User::all()->where('email', $newUser['email'])->count();
+    if($testOnUsername === 1) {
+      $this->redirect('/login');
     }
-    // TODO: save the user
+    if($testOnEmail === 1) {
+      $this->redirect('/login');
+    }
 
-    var_dump($username, $email, $password, $confirmPassword);
+    $this->save($newUser);
+    $_SESSION['username'] = $newUser['username'];
+    $this->redirect('/');
+  }
+
+  private function save($newUser) {
+    $user = new User();
+    $user->username = $newUser['username'];
+    $user->email = $newUser['email'];
+    $user->password = $newUser['password'];
+    $user->save();
   }
 }

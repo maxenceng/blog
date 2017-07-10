@@ -16,7 +16,7 @@ class PublicController extends BaseController {
    */
   public function getAll(Request $req, Response $res) {
     $posts = Post::withUser()->get();
-    $this->container->view->render($res, 'posts.twig', array(
+    $this->render($res, 'posts.twig', array(
       'state' => 'Public',
       'posts' => $posts
     ));
@@ -24,7 +24,7 @@ class PublicController extends BaseController {
 
   public function getOne(Request $req, Response $res, $args) {
     $posts = Post::withUser()->where('slug', $args['slug'])->get();
-    $this->container->view->render($res, 'post.twig', array(
+    $this->render($res, 'post.twig', array(
       'post' => $posts[0]
     ));
   }

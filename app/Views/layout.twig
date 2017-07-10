@@ -15,11 +15,17 @@
             <header class="navbar">
                 <section class="navbar-section">
                     <a href="/" class="btn btn-link">Home</a>
-                    <a href="/private-posts" class="btn btn-link">Private</a>
                     <a href="/public-posts" class="btn btn-link">Public</a>
+                    {% if session.username is defined %}
+                        <a href="/private-posts" class="btn btn-link">Private({{ session.username }})</a>
+                    {% endif %}
                 </section>
                 <section class="navbar-section">
-                    <a href="/login" class="btn btn-primary">Log in</a>
+                    {% if session.username is defined %}
+                        <a href="/logout" class="btn btn-primary">Log out</a>
+                    {% else %}
+                        <a href="/login" class="btn btn-primary">Log in</a>
+                    {% endif %}
                 </section>
             </header>
         </div>
