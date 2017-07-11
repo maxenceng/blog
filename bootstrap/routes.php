@@ -19,9 +19,6 @@ $app->get('/private-posts', PrivateController::class . ':getAll');
 $app->get('/public-posts/{slug}', PublicController::class . ':getOne');
 $app->get('/private-posts/{slug}', PrivateController::class . ':getOne');
 
-/* TESTS */
-$app->get('/db', HomeController::class . ':db');
-$app->get('/pd', HomeController::class . ':pd');
 
 $app->get('/login', LoginController::class . ':get');
 $app->post('/login', LoginController::class . ':post');

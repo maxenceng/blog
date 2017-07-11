@@ -14,7 +14,6 @@
     "require": {
         "slim/slim": "^3.8",
         "slim/twig-view": "^2.2",
-        "illuminate/database": "^5.4",
-        "erusev/parsedown": "^1.6"
+        "illuminate/database": "^5.4"
     }
 }

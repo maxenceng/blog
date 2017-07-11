@@ -15,7 +15,7 @@
                     <div class="divider"></div>
                 </div>
                 <div class="card-body">
-                    <p>{{ post.text | slice(0, 2) }}...</p>
+                    <p>{{ post.text | striptags | slice(0, 2) }}...</p>
                 </div>
                 <div class="card-footer">
                     <a href="/{{ state|lower }}-posts/{{ post.slug }}" class="btn">Read more</a>

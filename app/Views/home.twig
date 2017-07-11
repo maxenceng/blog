@@ -16,14 +16,28 @@
                            placeholder="Title" />
                 </div>
                 <div class="form-group">
-                    <label class="form-label" for="text">Text</label>
-                    <textarea class="form-input" id="text"
-                              rows="10" name="text" ></textarea>
+                    <label class="form-label" for="froala">Text</label>
+                    <textarea class="form-input"
+                              id="froala" name="text" ></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-checkbox" for="public">
+                        <input type="checkbox" id="public"
+                               name="public" />
+                        <i class="form-icon"></i>Public
+                    </label>
                 </div>
                 <div class="form-group form-submit">
                     <button class="btn btn-lg btn-block">Submit</button>
                 </div>
             </form>
+            <!-- Include external JS libs. -->
+            <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+            <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js"></script>
+            <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/xml/xml.min.js"></script>
+            <!-- Include Editor JS files. -->
+            <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.6.0/js/froala_editor.pkgd.min.js"></script>
+            <script> $(function() { $('#froala').froalaEditor() }); </script>
         {% else %}
             <p class="empty-subtitle">Click the button to log in and post articles</p>
             <div class="empty-action">

@@ -10,7 +10,7 @@ class Post extends Model {
   public $timestamps = false;
 
   public function user() {
-    return $this->belongsTo('\App\Models\User', 'idUser');
+    return $this->belongsTo('\App\Models\User', 'idUser', 'id');
   }
 
   public function scopeWithUser($query) {

@@ -25,26 +25,11 @@ class HomeController extends BaseController {
       $newPost = array(
         'title' => $title,
         'slug' => $this->createSlug($title),
-        'text' => $this->sanitize($_POST['text'])
+        'text' => $_POST['text'],
+        'public' => $this->isPublic($_POST)
       );
       $this->save($newPost);
-    }
-
-    public function db(Request $req, Response $res) {
-      $b = true;
-      $id = 3;
-      $test5 = User::with('posts')->where('id', $id)->get(['id', 'username']);
-      $test6 = Post::with(['user' => function($query) {
-        $query->select('id', 'username');
-      }])->where('public', true)->get();
-      $test = User::all()->where('username', $_SESSION['username']);
-      $test2 = User::find(1);
-      var_dump($test[0]->toJson());
-      var_dump($test2->toJson());
-    }
-
-    public function pd(Request $req, Response $res) {
-      echo $this->container->pd->text('Hello _Parsedown_!');
+      $this->redirect('/');
     }
 
     private function save($newPost) {
@@ -52,15 +37,22 @@ class HomeController extends BaseController {
       $post->title = $newPost['title'];
       $post->slug = $newPost['slug'];
       $post->text = $newPost['text'];
-      //$idUser = User::all()->where('username', $newPost['username'])->first()->get(['id'])->toArray()[0]['id'];
+      $post->public = $newPost['public'];
       $user = User::all()->where('username', $_SESSION['username'])[0];
-      $test = User::find(1);
-      $test->posts()->save($post);
+      $post->user()->associate($user);
+      $post->save();
     }
 
     private function createSlug($title) {
       $slug = strtolower($title);
       $slug = str_replace(' ', '-', $slug);
       return $slug;
+    }
+
+    private function isPublic($arg) {
+      if(!isset($arg['public'])) {
+        return false;
+      }
+      return true;
     }
 }

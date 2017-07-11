@@ -15,7 +15,7 @@ class PrivateController extends BaseController {
    * @param Response $res
    */
   public function getAll(Request $req, Response $res) {
-    $id = 3;
+    $id = $this->getId();
     $user = User::withPosts($id);
     $posts = $this->formatData($user);
     $this->render($res, 'posts.twig', array(
@@ -25,7 +25,7 @@ class PrivateController extends BaseController {
   }
 
   public function getOne(Request $req, Response $res, $args) {
-    $id = 3;
+    $id = $this->getId();
     $user = User::withSlug($id, $args['slug']);
     $posts = $this->formatData($user);
     $this->render($res, 'post.twig', array(
@@ -40,5 +40,12 @@ class PrivateController extends BaseController {
       $post['user']['username'] = $user[0]['username'];
     }
     return $posts;
+  }
+
+  private function getId() {
+    return User::all()
+      ->where('username', $_SESSION['username'])[0]
+      ->get(['id'])
+      ->toArray()[0]['id'];
   }
 }

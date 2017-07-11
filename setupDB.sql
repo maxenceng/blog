@@ -16,6 +16,6 @@ CREATE TABLE posts(
   text VARCHAR(1000) NOT NULL,
   public BOOLEAN NOT NULL,
   idUser INT NOT NULL,
-  CONSTRAINT fk_idUser FOREIGN KEY (id)
+  CONSTRAINT fk_idUser FOREIGN KEY (idUser)
   REFERENCES users(id)
 );
