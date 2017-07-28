@@ -9,20 +9,40 @@ use Slim\Http\Response;
 
 class LoginController extends BaseController {
 
-
+  /**
+   * @param Request $req
+   * @param Response $res
+   */
   public function get(Request $req, Response $res) {
-    $this->render($res, 'login.twig');
+    if (isset($_SESSION['username'])) {
+      $this->redirect('/');
+    } else {
+      $this->render($res, 'login.twig');
+    }
   }
 
+  /**
+   * Checks if the user exists and redirects depending on the condition
+   * @param Request $req
+   * @param Response $res
+   */
   public function post(Request $req, Response $res) {
     $username = $this->sanitize($_POST['username']);
     $password = $this->sanitize($_POST['password']);
-    $testOnUser = User::all()->where('username', $username)->where('password', $password)->count();
+    $testOnUser = User::where('username', $username)->count();
     if($testOnUser === 0) {
       $this->redirect('/login');
     }
-    $_SESSION['username'] = $username;
-    $this->redirect('/');
+
+    $hashedPassword = User::where('username', $username)->first()->toArray()['password'];
+
+    if(password_verify($password, $hashedPassword)) {
+      $_SESSION['username'] = $username;
+      $this->redirect('/');
+    } else {
+      $this->redirect('/login');
+    }
+
   }
 
 }

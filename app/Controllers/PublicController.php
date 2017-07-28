@@ -22,6 +22,12 @@ class PublicController extends BaseController {
     ));
   }
 
+  /**
+   * Renders one post only
+   * @param Request $req
+   * @param Response $res
+   * @param $args
+   */
   public function getOne(Request $req, Response $res, $args) {
     $posts = Post::withUser()->where('slug', $args['slug'])->get();
     $this->render($res, 'post.twig', array(

@@ -36,13 +36,3 @@ $container['db'] = function ($container) {
 
   return $capsule;
 };
-
-/**
- * Adds Parsedown to the container
- * @param $container
- * @return Parsedown
- */
-$container['pd'] = function($container) {
-  $pd = new Parsedown();
-  return $pd;
-};

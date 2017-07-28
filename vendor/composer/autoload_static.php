@@ -42,6 +42,10 @@ class ComposerStaticInit689e88e6188cb96ca6f8c38d1bb88735
         array (
             'FastRoute\\' => 10,
         ),
+        'D' => 
+        array (
+            'Doctrine\\Common\\Inflector\\' => 26,
+        ),
         'C' => 
         array (
             'Carbon\\' => 7,
@@ -105,6 +109,10 @@ class ComposerStaticInit689e88e6188cb96ca6f8c38d1bb88735
         array (
             0 => __DIR__ . '/..' . '/nikic/fast-route/src',
         ),
+        'Doctrine\\Common\\Inflector\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/doctrine/inflector/lib/Doctrine/Common/Inflector',
+        ),
         'Carbon\\' => 
         array (
             0 => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon',
@@ -128,13 +136,6 @@ class ComposerStaticInit689e88e6188cb96ca6f8c38d1bb88735
             'Pimple' => 
             array (
                 0 => __DIR__ . '/..' . '/pimple/pimple/src',
-            ),
-        ),
-        'D' => 
-        array (
-            'Doctrine\\Common\\Inflector\\' => 
-            array (
-                0 => __DIR__ . '/..' . '/doctrine/inflector/lib',
             ),
         ),
     );

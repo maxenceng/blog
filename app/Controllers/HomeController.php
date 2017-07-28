@@ -20,6 +20,11 @@ class HomeController extends BaseController {
       $this->render($res, 'home.twig');
     }
 
+  /**
+   * Posts the article to the DB
+   * @param Request $req
+   * @param Response $res
+   */
     public function post(Request $req, Response $res) {
       $title = $this->sanitize($_POST['title']);
       $newPost = array(
@@ -32,23 +37,36 @@ class HomeController extends BaseController {
       $this->redirect('/');
     }
 
+  /**
+   * @param $newPost
+   */
     private function save($newPost) {
       $post = new Post();
       $post->title = $newPost['title'];
       $post->slug = $newPost['slug'];
       $post->text = $newPost['text'];
       $post->public = $newPost['public'];
-      $user = User::all()->where('username', $_SESSION['username'])[0];
+      $user = User::where('username', $_SESSION['username'])->first();
       $post->user()->associate($user);
       $post->save();
     }
 
+  /**
+   * Creates the slug to have correct routes
+   * @param $title
+   * @return mixed|string
+   */
     private function createSlug($title) {
       $slug = strtolower($title);
       $slug = str_replace(' ', '-', $slug);
       return $slug;
     }
 
+  /**
+   * Checks if the article is public or not
+   * @param $arg
+   * @return bool
+   */
     private function isPublic($arg) {
       if(!isset($arg['public'])) {
         return false;
